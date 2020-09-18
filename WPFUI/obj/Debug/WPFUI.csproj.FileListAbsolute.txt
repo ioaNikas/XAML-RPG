@@ -15,3 +15,5 @@ C:\Perso\SOSCSRPG\WPFUI\obj\Debug\WPFUI.pdb
 C:\Perso\SOSCSRPG\WPFUI\bin\Debug\Engine.dll
 C:\Perso\SOSCSRPG\WPFUI\bin\Debug\Engine.pdb
 C:\Perso\SOSCSRPG\WPFUI\obj\Debug\WPFUI.csproj.CopyComplete
+C:\Perso\SOSCSRPG\WPFUI\obj\Debug\TradeScreen.baml
+C:\Perso\SOSCSRPG\WPFUI\obj\Debug\TradeScreen.g.cs

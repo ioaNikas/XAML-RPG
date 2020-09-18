@@ -13,6 +13,7 @@ namespace Engine.ViewModels
         #region Properties
         private Location _currentLocation;
         private Monster _currentMonster;
+        private Trader _currentTrader;
 
         public Player CurrentPlayer { get; set; }
         public Location CurrentLocation 
@@ -31,6 +32,8 @@ namespace Engine.ViewModels
                 CompleteQuestsAtLocation();
                 GivePlayerQuestsAtLocation();
                 GetMonsterAtLocation();
+
+                CurrentTrader = CurrentLocation.TraderHere;
             }
         }
 
@@ -52,6 +55,18 @@ namespace Engine.ViewModels
             }
         }
 
+        public Trader CurrentTrader
+        {
+            get { return _currentTrader; }
+            set
+            {
+                _currentTrader = value;
+
+                OnPropertyChanged(nameof(CurrentTrader));
+                OnPropertyChanged(nameof(HasTrader));
+            }
+        }
+
         public Weapon CurrentWeapon { get; set; }
 
         public World CurrentWorld { get; set; }
@@ -61,6 +76,7 @@ namespace Engine.ViewModels
         public bool HasLocationToEast => CurrentWorld.LocationAt(CurrentLocation.XCoordinate +1, CurrentLocation.YCoordinate) != null;
         public bool HasLocationToSouth => CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
         public bool HasMonster => CurrentMonster != null;
+        public bool HasTrader => CurrentTrader != null;
 
         //Constructeur
         public GameSession()
@@ -68,16 +84,17 @@ namespace Engine.ViewModels
             CurrentPlayer = new Player
             {
                 Name = "Alvard",
-                Gold = 1000000,
+                Gold = 0,
                 CharacterClass = "Wizard",
-                HitPoints = 10,
+                MaximumHitPoints = 10,
+                CurrentHitPoints = 10,
                 ExperiencePoints = 0,
                 Level = 1
             };
 
             if (!CurrentPlayer.Weapons.Any())
             {
-                CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1111));
+                CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1001));
             }
 
             CurrentWorld = WorldFactory.CreateWorld();
@@ -208,11 +225,11 @@ namespace Engine.ViewModels
             }
             else
             {
-                CurrentMonster.HitPoints -= damageToMonster;
+                CurrentMonster.CurrentHitPoints -= damageToMonster;
                 RaiseMessage($"You hit the {CurrentMonster.Name} for {damageToMonster} points.");
             }
 
-            if (CurrentMonster.HitPoints <=0)
+            if (CurrentMonster.CurrentHitPoints <= 0)
             {
                 RaiseMessage("");
                 RaiseMessage($"You defeated the {CurrentMonster.Name}!");
@@ -220,14 +237,13 @@ namespace Engine.ViewModels
                 CurrentPlayer.ExperiencePoints += CurrentMonster.RewardExperiencePoints;
                 RaiseMessage($"You receive {CurrentMonster.RewardExperiencePoints} experience points.");
 
-                CurrentPlayer.Gold += CurrentMonster.RewardGold;
-                RaiseMessage($"You receive {CurrentMonster.RewardGold} gold.");
+                CurrentPlayer.Gold += CurrentMonster.Gold;
+                RaiseMessage($"You receive {CurrentMonster.Gold} gold.");
 
-                foreach (ItemQuantity itemQuantity in CurrentMonster.Inventory)
+                foreach (GameItem gameItem in CurrentMonster.Inventory)
                 {
-                    GameItem item = ItemFactory.CreateGameItem(itemQuantity.ItemID);
-                    CurrentPlayer.AddItemToInventory(item);
-                    RaiseMessage($"You receive {itemQuantity.Quantity} {item.Name}.");
+                    CurrentPlayer.AddItemToInventory(gameItem);
+                    RaiseMessage($"You receive {gameItem.Name} x 1.");
                 }
 
                 GetMonsterAtLocation();
@@ -242,17 +258,17 @@ namespace Engine.ViewModels
                 }
                 else
                 {
-                    CurrentPlayer.HitPoints -= damageToPlayer;
+                    CurrentPlayer.CurrentHitPoints -= damageToPlayer;
                     RaiseMessage($"The {CurrentMonster.Name} hits you for {damageToPlayer} points.");
                 }
 
-                if (CurrentPlayer.HitPoints <= 0)
+                if (CurrentPlayer.CurrentHitPoints <= 0)
                 {
                     RaiseMessage("");
                     RaiseMessage($"The {CurrentMonster.Name} killed you.");
 
                     CurrentLocation = CurrentWorld.LocationAt(0, -1);
-                    CurrentPlayer.HitPoints = CurrentPlayer.Level * 10;
+                    CurrentPlayer.CurrentHitPoints = CurrentPlayer.Level * 10;
                 }
             }
         }
