@@ -49,6 +49,7 @@
     <Compile Include="Factories\TraderFactory.cs" />
     <Compile Include="Factories\WorldFactory.cs" />
     <Compile Include="Models\GameItem.cs" />
+    <Compile Include="Models\GroupedInventoryItem.cs" />
     <Compile Include="Models\ItemQuantity.cs" />
     <Compile Include="Models\LivingEntity.cs" />
     <Compile Include="Models\Location.cs" />
@@ -87,6 +88,13 @@
     <Resource Include="Images\Monsters\Rat.png" />
     <Resource Include="Images\Monsters\Snake.png" />
     <Resource Include="Images\Monsters\Spider.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Music\MainTheme.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Music\TraderTheme.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

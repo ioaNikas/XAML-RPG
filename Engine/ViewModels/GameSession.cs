@@ -3,12 +3,14 @@ using Engine.Factories;
 using Engine.Models;
 using System;
 using System.Linq;
+using System.Media;
 
 namespace Engine.ViewModels
 {
     public class GameSession : BaseNotificationClass
     {
         public event EventHandler<GameMessageEventArgs> OnMessageRaised;
+        public readonly SoundPlayer _player = new SoundPlayer();
 
         #region Properties
         private Location _currentLocation;
@@ -81,6 +83,10 @@ namespace Engine.ViewModels
         //Constructeur
         public GameSession()
         {
+            _player.SoundLocation = @"C:\Perso\SOSCSRPG\Engine\Music\MainTheme.wav";
+            _player.Load();
+            _player.Play();
+
             CurrentPlayer = new Player
             {
                 Name = "Alvard",
