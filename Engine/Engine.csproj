@@ -90,11 +90,5 @@
     <Resource Include="Images\Monsters\Spider.png" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Resource Include="Music\MainTheme.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Content Include="Music\TraderTheme.wav" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

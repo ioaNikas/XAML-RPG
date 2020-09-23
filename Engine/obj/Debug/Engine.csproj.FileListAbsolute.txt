@@ -5,3 +5,10 @@ C:\Perso\SOSCSRPG\Engine\obj\Debug\Engine.csproj.CoreCompileInputs.cache
 C:\Perso\SOSCSRPG\Engine\obj\Debug\Engine.dll
 C:\Perso\SOSCSRPG\Engine\obj\Debug\Engine.pdb
 C:\Perso\SOSCSRPG\Engine\obj\Debug\Engine.g.resources
+C:\Users\myria\Documents\ProjetJV\XAML-RPG\Engine\bin\Debug\Engine.dll
+C:\Users\myria\Documents\ProjetJV\XAML-RPG\Engine\bin\Debug\Engine.pdb
+C:\Users\myria\Documents\ProjetJV\XAML-RPG\Engine\obj\Debug\Engine.csprojAssemblyReference.cache
+C:\Users\myria\Documents\ProjetJV\XAML-RPG\Engine\obj\Debug\Engine.g.resources
+C:\Users\myria\Documents\ProjetJV\XAML-RPG\Engine\obj\Debug\Engine.csproj.CoreCompileInputs.cache
+C:\Users\myria\Documents\ProjetJV\XAML-RPG\Engine\obj\Debug\Engine.dll
+C:\Users\myria\Documents\ProjetJV\XAML-RPG\Engine\obj\Debug\Engine.pdb
